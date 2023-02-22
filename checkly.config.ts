@@ -1,4 +1,5 @@
 import { defineConfig } from "@checkly/cli";
+require('dotenv').config()
 
 export default defineConfig({
   projectName: "Website Monitoring",

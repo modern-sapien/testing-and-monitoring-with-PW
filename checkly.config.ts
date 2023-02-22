@@ -16,7 +16,7 @@ export default defineConfig({
     ignoreDirectoriesMatch: [],
     browserChecks: {
       frequency: 10,
-      testMatch: "**/__checks__/*.spec.ts",
+      testMatch: "**/tests/*.spec.ts",
     },
   },
   cli: {

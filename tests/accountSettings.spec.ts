@@ -1,8 +1,7 @@
 // @ts-ignore
 import { test, expect } from "@playwright/test";
-import { chromium } from "playwright";
 
-test("test", async ({ page }) => {
+test("account settings", async ({ page }) => {
   await page.goto("https://danube-web.shop/");
 
   await page.click("#login");

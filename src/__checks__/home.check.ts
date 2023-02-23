@@ -46,7 +46,7 @@ new BrowserCheck("example-check-1", {
   name: "Playwright homepage",
   groupId: group.ref(),
   code: {
-    entrypoint: "/Users/jonathancheckly/Desktop/CODE/learning/playwright-monitoring-cli/tests/example.spec.ts",
+    entrypoint: path."/Users/jonathancheckly/Desktop/CODE/learning/playwright-monitoring-cli/tests/example.spec.ts",
     // this needs to be replaced with something scalable
   },
 });

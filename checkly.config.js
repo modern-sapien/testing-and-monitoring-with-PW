@@ -1,7 +1,4 @@
-import { defineConfig } from "@checkly/cli";
-require('dotenv').config()
-
-export default defineConfig({
+const config = {
   projectName: "Website Monitoring",
   logicalId: "website-monitoring-1",
   repoUrl: "https://github.com/acme/website",
@@ -13,14 +10,16 @@ export default defineConfig({
     locations: ["us-east-1", "eu-west-1"],
     tags: ["website", "api"],
     alertChannels: [],
-    checkMatch: "**/__checks__/*.check.ts",
+    checkMatch: "**/__checks__/*.check.js",
     ignoreDirectoriesMatch: [],
     browserChecks: {
       frequency: 10,
-      testMatch: "**/tests/*.spec.ts",
+      testMatch: "**/__checks__/*.spec.js",
     },
   },
   cli: {
     runLocation: "eu-west-1",
   },
-});
+};
+
+module.exports = config;

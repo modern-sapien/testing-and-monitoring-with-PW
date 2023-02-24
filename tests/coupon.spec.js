@@ -23,7 +23,7 @@ test("coupon", async ({ page }) => {
   const expectedDiscountedPrice = await price * 0.8;
   const discountedPrice = await page.$eval("#total-price", (e) => e.innerText);
 
-  if (discountedPrice ==! expectedDiscountedPrice) {
+  if (discountedPrice != expectedDiscountedPrice) {
     throw console.error("discount price mistmatch");
   }
 });

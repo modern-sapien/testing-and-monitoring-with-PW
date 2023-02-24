@@ -34,4 +34,4 @@ test("checkout", async ({ page }) => {
   await page.click(".checkout > .call-to-action");
 
   await page.waitForSelector("#order-confirmation");
-})
+});

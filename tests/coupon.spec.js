@@ -20,10 +20,8 @@ test("coupon", async ({ page }) => {
   await page.type("#coupon", "COUPON2020");
   await page.click(".cart > div > button");
 
-  const expectedDiscountedPrice = await price * 0.8;
+  const expectedDiscountedPrice = (await price) * 0.8;
   const discountedPrice = await page.$eval("#total-price", (e) => e.innerText);
 
-  if (discountedPrice != expectedDiscountedPrice) {
-    throw console.error("discount price mistmatch");
-  }
+  expect(discountedPrice).toEqual(expectedDiscountedPrice);
 });

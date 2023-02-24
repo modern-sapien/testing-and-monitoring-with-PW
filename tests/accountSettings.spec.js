@@ -1,10 +1,7 @@
 // @ts-ignore
 import { test, expect } from "@playwright/test";
 
-
 test("account settings", async ({ page }) => {
-  console.log(process.env)
-  
   await page.goto("https://danube-web.shop/");
 
   await page.click("#login");

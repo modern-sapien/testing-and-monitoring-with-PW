@@ -21,7 +21,7 @@ test("coupon", async ({ page }) => {
   await page.click(".cart > div > button");
 
   const expectedDiscountedPrice = (await price) * 0.8;
-  const discountedPrice = await page.$eval("#total-price", (e) => e.innerText);
+  const discountedPrice = await page.$eval("#total-price", (e) => parseFloat(e.innerText));
 
-  expect(discountedPrice).toEqual(expectedDiscountedPrice);
+  expect((discountedPrice)).toEqual(expectedDiscountedPrice);
 });

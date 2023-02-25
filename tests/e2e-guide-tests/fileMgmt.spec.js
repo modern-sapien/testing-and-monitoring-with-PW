@@ -37,11 +37,9 @@ test("file download", async ({ page }) => {
 
   const download = await downloadPromise;
 
-  console.log(await download.path());
-
   const newFilePath = await download.path();
 
-  const testFile = await fs.promises.readFile(process.env.TEST_FILE_PATH); // Read the contents of the fixture file
+  const testFile = await fs.promises.readFile(process.env.TEST_FILE_PATH);
   const newFile = await fs.promises.readFile(newFilePath);
 
   expect(testFile).toEqual(newFile);

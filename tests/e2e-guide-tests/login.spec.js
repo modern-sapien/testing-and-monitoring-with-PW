@@ -10,6 +10,7 @@ test("login flow", async ({ page }) => {
   await page.type("#n-password2", process.env.USER_PASSWORD);
 
   await page.click("#goto-signin-btn");
-
-  await page.waitForSelector("#login-message");
+  
+  const loginMessage = await page.locator('#login-message')
+  await expect(loginMessage).toBeVisible()
 });

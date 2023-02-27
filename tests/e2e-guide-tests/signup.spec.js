@@ -17,5 +17,6 @@ test("signup flow", async ({ page }) => {
   await page.click("#privacy-policy");
   await page.click("#register-btn");
 
-  await page.waitForSelector("#login-message");
+  const loginMessage = await page.locator('#login-message')
+  await expect(loginMessage).toBeVisible()
 });

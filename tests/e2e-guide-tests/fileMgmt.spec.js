@@ -21,7 +21,7 @@ test("file upload", async ({ page }) => {
   await page.getByText("Upload successful.");
 });
 
-test.only("file download", async ({ page }) => {
+test("file download", async ({ page }) => {
   const url = await page.$eval("#orders > ul > li > a", (el) => el.href);
   const filePath = './tests/fixtures/downloadedFile.pdf';
 
@@ -39,7 +39,6 @@ test.only("file download", async ({ page }) => {
     writer.on('finish', resolve);
     writer.on('error', reject);
   });
-  console.log(`File downloaded to ${filePath}`);
 
   // Compare the downloaded file to the existing file using Playwright/Test
   const downloadedFile = await page.locator('input[type=file]').inputValue(filePath);

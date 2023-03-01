@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "checkly check"
+    "test": "checkly check",
+    "checkly:deploy": "npx checkly deploy --force",
+    "checkly:test": "npx checkly test"
   },
   "repository": {
     "type": "git",

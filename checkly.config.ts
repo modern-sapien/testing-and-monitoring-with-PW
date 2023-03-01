@@ -10,11 +10,11 @@ const config = {
     locations: ["us-east-1", "eu-west-1"],
     tags: ["website", "api"],
     alertChannels: [],
-    checkMatch: "**/__checks__/*.check.js",
+    checkMatch: "**/__checks__/*.check.ts",
     ignoreDirectoriesMatch: [],
     browserChecks: {
       frequency: 10,
-      testMatch: "**/__checks__/*.spec.js",
+      testMatch: "**/__checks__/*.spec.ts",
     },
   },
   cli: {
@@ -22,4 +22,4 @@ const config = {
   },
 };
 
-module.exports = config;
+export default config

@@ -1,5 +1,5 @@
 import * as path from "path";
-import { BrowserCheck } from "@checkly/cli/constructs";
+import { CheckGroup, BrowserCheck } from "@checkly/cli/constructs";
 import { smsChannel, emailChannel } from "../alert-channels";
 const alertChannels = [smsChannel, emailChannel];
 
@@ -10,18 +10,28 @@ const alertChannels = [smsChannel, emailChannel];
  */
 
 // We can define multiple checks in a single *.check.js file.
-new BrowserCheck("homepage-browser-check-1", {
-  name: "Homepage",
+const group = new CheckGroup("critical-flow-check-group", {
+  name: "Critical User Flow checks",
+  activated: true,
+  muted: false,
+  runtimeId: "2022.10",
+  locations: ["us-east-1", "eu-west-1"],
+  tags: ["critical", "userflows"],
+  environmentVariables: [],
+  apiCheckDefaults: {},
+  concurrency: 100,
   alertChannels,
-  code: {
-    entrypoint: path.join(__dirname, "homepage.spec.ts"),
+  browserChecks: {
+    frequency: 10,
+    testMatch: "some-dir/*.spec.ts",
   },
 });
 
-new BrowserCheck("404-browser-check-1", {
-  name: "404 page",
+new BrowserCheck("account-settings-browser-check", {
+  name: "Account Settings",
+  group,
   alertChannels,
   code: {
-    entrypoint: path.join(__dirname, "404.spec.ts"),
+    entrypoint: path.join(__dirname, "accountSettings.spec.ts"),
   },
 });

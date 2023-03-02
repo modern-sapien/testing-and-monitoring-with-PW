@@ -10,13 +10,13 @@ const alertChannels = [smsChannel, emailChannel];
  */
 
 // We can define multiple checks in a single *.check.js file.
-const group = new CheckGroup("check-group-1", {
-  name: "Group",
+const group = new CheckGroup("basic-api-check-group", {
+  name: "API checks",
   activated: true,
   muted: false,
   runtimeId: "2022.10",
   locations: ["us-east-1", "eu-west-1"],
-  tags: ["mac", "group"],
+  tags: ["critical", "APIs"],
   environmentVariables: [],
   apiCheckDefaults: {},
   concurrency: 100,

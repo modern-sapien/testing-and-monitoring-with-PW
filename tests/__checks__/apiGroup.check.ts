@@ -1,6 +1,6 @@
-import { CheckGroup, ApiCheck } from "@checkly/cli/constructs";
-import { smsChannel, emailChannel } from "../alert-channels";
-const alertChannels = [smsChannel, emailChannel];
+import { CheckGroup, ApiCheck, AssertionBuilder } from "@checkly/cli/constructs";
+import { slackChannel, webhookChannel, smsChannel, emailChannel } from "../alert-channels";
+
 /*
  * In this example, we bundle checks using a Check Group. We add checks to this group in two ways:
  * 1. By passing the `CheckGroup` object for the `group` property of the check.
@@ -20,7 +20,9 @@ const group = new CheckGroup("basic-api-check-group", {
   environmentVariables: [],
   apiCheckDefaults: {},
   concurrency: 100,
-  alertChannels,
+  alertChannels: [
+    slackChannel, webhookChannel, smsChannel, emailChannel
+  ],
   browserChecks: {
     testMatch: "some-dir/*.spec.ts",
   },
@@ -36,6 +38,9 @@ new ApiCheck("check-group-api-check-1", {
     url: "https://api.checklyhq.com/public-stats",
     followRedirects: true,
     skipSsl: false,
-    assertions: [],
+    assertions: [
+      AssertionBuilder.statusCode().equals(200),
+      AssertionBuilder.jsonBody("$.apiCheckResults").greaterThan(0),
+    ],
   },
 });

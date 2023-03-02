@@ -1,6 +1,5 @@
 const { defineConfig } = require("@playwright/test");
 const { devices } = require("@playwright/test");
-
 require("dotenv").config();
 
 /**
@@ -15,7 +14,7 @@ require("dotenv").config();
 module.exports = defineConfig({
   testDir: "./tests",
   /* Maximum time one test can run for. */
-  timeout: 50 * 1000,
+  timeout: 3 * 10000,
   expect: {
     /**
      * Maximum time expect() should wait for the condition to be met.

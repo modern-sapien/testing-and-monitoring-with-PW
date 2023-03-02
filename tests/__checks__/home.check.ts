@@ -2,6 +2,7 @@ import * as path from "path";
 import { BrowserCheck } from "@checkly/cli/constructs";
 import { smsChannel, emailChannel } from "../alert-channels";
 const alertChannels = [smsChannel, emailChannel];
+
 /*
  * In this example, we bundle all basic checks needed to check the Checkly homepage. We explicitly define the Browser
  * check here, instead of using generating a default based on a .spec.js file. This allows us to override the check configuration.

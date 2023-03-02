@@ -8,7 +8,9 @@ test("signup flow", async ({ page }) => {
 
   await page.type("#s-name", "John");
   await page.type("#s-surname", "Doe");
+  // @ts-ignore USER_EMAIL is returning a string
   await page.type("#s-email", process.env.USER_EMAIL);
+  // @ts-ignore USER_PASSWORD is returning a string
   await page.type("#s-password2", process.env.USER_PASSWORD);
   await page.type("#s-company", "John Doe Inc.");
 

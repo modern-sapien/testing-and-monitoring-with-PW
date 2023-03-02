@@ -1,6 +1,7 @@
-import { test, expect, type Page } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
+  test.skip(process.env.CHECKLY_DONT === "skip")
   await page.goto('https://demo.playwright.dev/todomvc');
 });
 

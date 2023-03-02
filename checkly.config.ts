@@ -1,4 +1,5 @@
 import { defineConfig } from '@checkly/cli'
+require('dotenv').config()
 
 const config = defineConfig({
   projectName: 'Advanced Example Project',
@@ -16,7 +17,7 @@ const config = defineConfig({
     ignoreDirectoriesMatch: [],
     browserChecks: {
       frequency: 10,
-      testMatch: "**/__checks__/*.spec.ts",
+      testMatch: "**/e2e-guide-tests/*.spec.ts",
     },
   },
   cli: {

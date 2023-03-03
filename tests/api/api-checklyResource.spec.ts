@@ -1,7 +1,6 @@
 // @ts-ignore
 import { test, expect } from "@playwright/test";
 
-
 test('API - ', async ({ request }) => {
   const response = await request.get(`https://danube-web.shop/api/books`, {
     headers: {
@@ -9,4 +8,5 @@ test('API - ', async ({ request }) => {
     }
   });
   expect(response.ok()).toBeTruthy();
+  console.log(response.status())
   })

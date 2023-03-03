@@ -16,7 +16,7 @@ const group = new CheckGroup("basic-api-check-group", {
   muted: false,
   runtimeId: "2022.10",
   locations: ["us-east-1", "eu-west-1"],
-  tags: ["critical", "APIs"],
+  tags: ["default", "APIs"],
   environmentVariables: [],
   apiCheckDefaults: {},
   concurrency: 100,

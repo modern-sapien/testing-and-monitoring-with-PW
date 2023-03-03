@@ -1,7 +1,7 @@
 // @ts-ignore
 import { test, expect } from "@playwright/test";
 
-test('API - danube is active and up', async ({ request }) => {
+test('API - danube - active and up', async ({ request }) => {
   const response = await request.get(`https://danube-web.shop/api/books`, {
     headers: {
       Accept: 'application/json',
@@ -11,14 +11,12 @@ test('API - danube is active and up', async ({ request }) => {
   })
 
 
-  test('API - danube book list length matches inventory', async ({ request } ) => {
+  test('API - danube - book length matches inventory', async ({ request } ) => {
     const response = await request.get(`https://danube-web.shop/api/books`, {
       headers: {
         Accept: 'application/json',
       }
     });
-
-    await response.json()
 
     const responseJSON = await response.json()
 

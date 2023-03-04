@@ -12,6 +12,8 @@ export const checklyGroupMethods = {
   createBrowserCheckFromList(group, checkGroupFileName, directoryPath, arrayOfFileNames, directoryFolderName) {
     //passsing directoryPath and callback function
     fs.readdir(directoryPath, function (err, files) {
+      console.log(directoryPath, "before for each")
+      
       //handling error
       if (err) {
         return console.log("Unable to scan directory: " + err);
@@ -19,7 +21,6 @@ export const checklyGroupMethods = {
       // get file names within directory and split off endings
       files.forEach(function (file) {
         // Do whatever you want to do with the file
-        const folderName = directoryFolderName
         const fileWithoutEnding = file.split(".")[0];
         
         fileWithoutEnding === checkGroupFileName
@@ -28,16 +29,13 @@ export const checklyGroupMethods = {
       });
 
       // @ts-ignore
-      arrayOfFileNames.forEach(function (checkFileName, folderName) {
-        console.log(checkFileName)
-        console.log(folderName, " in the helper function for each")
-
+      arrayOfFileNames.forEach(function (checkFileName) {
         new BrowserCheck(`${checkFileName}-critical-check-1`, {
           name: checkFileName,
           group,
           alertChannels,
           code: {
-            entrypoint: path.join(__dirname, String(directoryFolderName),`${checkFileName}.spec.ts`),
+            entrypoint: path.join(__dirname, directoryFolderName,`${checkFileName}.spec.ts`),
           },
         });
       });

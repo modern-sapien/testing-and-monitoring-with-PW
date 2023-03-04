@@ -1,8 +1,8 @@
 import * as path from "path";
-import * as fs from "fs";
-import { CheckGroup, BrowserCheck } from "@checkly/cli/constructs";
+import { CheckGroup } from "@checkly/cli/constructs";
 import { smsChannel, emailChannel } from "../alert-channels";
-const alertChannels = [smsChannel, emailChannel];
+const alertChannels = [smsChannel, emailChannel];import { checklyGroupMethods } from "../checkGroupCreation";
+
 
 /*
  * In this example, we bundle all basic checks needed to check the Checkly homepage. We explicitly define the Browser
@@ -28,33 +28,40 @@ const group = new CheckGroup("critical-flow-check-group", {
   },
 });
 
-const directoryPath = path.join(__dirname, "");
+
+
+// //passsing directoryPath and callback function
+// fs.readdir(directoryPath, function (err, files) {
+//   //handling error
+//   if (err) {
+//     return console.log("Unable to scan directory: " + err);
+//   }
+//   // get file names within directory and split off endings
+//   files.forEach(function (file) {
+//     // Do whatever you want to do with the file
+//     const fileWithoutEnding = file.split(".")[0];
+//     fileWithoutEnding === "criticalFlowGroup"?console.log('gotcha'):
+//     arrayOfFileNames.push(fileWithoutEnding);
+//   });
+
+//   console.log(arrayOfFileNames);
+
+//   arrayOfFileNames.forEach(function (checkFileName) {
+//     new BrowserCheck(`${checkFileName}-critical-check-1`, {
+//       name: checkFileName,
+//       group,
+//       alertChannels,
+//       code: {
+//         entrypoint: path.join(__dirname, `${checkFileName}.spec.ts`),
+//       },
+//     });
+//   });
+// });
+
+const directoryPath = path.join(__dirname);
+const directoryFolderName = "e2e-guide-tests"
+const filePath = path.basename(__filename).split(".");
+const checkGroupFileName = filePath[0]
 let arrayOfFileNames: Array<string> = [];
 
-//passsing directoryPath and callback function
-fs.readdir(directoryPath, function (err, files) {
-  //handling error
-  if (err) {
-    return console.log("Unable to scan directory: " + err);
-  }
-  // get file names within directory and split off endings
-  files.forEach(function (file) {
-    // Do whatever you want to do with the file
-    const fileWithoutEnding = file.split(".")[0];
-    fileWithoutEnding === "criticalFlowGroup"?console.log('gotcha'):
-    arrayOfFileNames.push(fileWithoutEnding);
-  });
-
-  console.log(arrayOfFileNames);
-
-  arrayOfFileNames.forEach(function (checkFileName) {
-    new BrowserCheck(`${checkFileName}-critical-check-1`, {
-      name: checkFileName,
-      group,
-      alertChannels,
-      code: {
-        entrypoint: path.join(__dirname, `${checkFileName}.spec.ts`),
-      },
-    });
-  });
-});
+checklyGroupMethods.createBrowserCheckFromList(group, checkGroupFileName, directoryPath, arrayOfFileNames, directoryFolderName);

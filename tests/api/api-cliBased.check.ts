@@ -25,13 +25,9 @@ const group = new CheckGroup("critical-API-check-group", {
 
 // Declaring variables for use with checklyGroupMethods
 const directoryPath = path.join(__dirname);
+const directoryFolderName = "api"
 const filePath = path.basename(__filename).split(".");
 const checkGroupFileName = filePath[0]
 let arrayOfFileNames: Array<string> = [];
 
-console.log(filePath[0])
-console.log(directoryPath)
-console.log(arrayOfFileNames)
-
-
-checklyGroupMethods.createBrowserCheckFromList(group, checkGroupFileName, directoryPath, arrayOfFileNames);
+checklyGroupMethods.createBrowserCheckFromList(group, checkGroupFileName, directoryPath, arrayOfFileNames, directoryFolderName);

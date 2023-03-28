@@ -1,36 +1,37 @@
+// @ts-nocheck
 import { test, expect } from "@playwright/test";
 
 test("checkout", async ({ page }) => {
   const navigationPromise = page.waitForNavigation();
 
   await page.goto("https://danube-web.shop/");
-  // @ts-ignore
+
   for (let i = 1; i <= process.env.PRODUCTS_NUMBER; i++) {
-    await page.click(`.preview:nth-child(${i}) > .preview-author`);
-    await page.click(".detail-wrapper > .call-to-action");
-    await page.click("#logo");
+    await page.locator(`.preview:nth-child(${i}) > .preview-author`).click();
+    await page.locator(".detail-wrapper > .call-to-action").click();
+    await page.locator("#logo").click();
 
     await navigationPromise;
   }
 
-  await page.click("#cart");
+  await page.locator("#cart").click();
 
-  await page.click(".cart > .call-to-action");
+  await page.locator(".cart > .call-to-action").click();
 
-  await page.click("#app-content #s-name");
+  await page.locator("#app-content #s-name").click();
 
-  await page.type("#s-name", "Max");
-  await page.type("#s-surname", "Mustermann");
-  await page.type("#s-address", "Charlottenstr. 57");
-  await page.type("#s-zipcode", "10117");
-  await page.type("#s-city", "Berlin");
-  await page.type("#s-company", "Firma GmbH");
+  await page.locator("#s-name").type("Max");
+  await page.locator("#s-surname").type("Mustermann");
+  await page.locator("#s-address").type("Charlottenstr. 57");
+  await page.locator("#s-zipcode").type("10117");
+  await page.locator("#s-city").type("Berlin");
+  await page.locator("#s-company").type("Firma GmbH");
 
-  await page.click(".checkout > form");
+  await page.locator(".checkout > form").click();
 
-  await page.click("#asap");
+  await page.locator("#asap").click();
 
-  await page.click(".checkout > .call-to-action");
+  await page.locator(".checkout > .call-to-action").click();
 
   const orderConfirmation = await page.locator("#order-confirmation");
   await expect(orderConfirmation).toBeVisible();

@@ -1,14 +1,13 @@
+// @ts-nocheck
 import { test, expect } from "@playwright/test";
-const fs = require("fs");
-const axios = require("axios");
+import fs from "fs";
+import axios from "axios";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("https://danube-web.shop/");
 
   await page.locator("#login").click();
-  // @ts-ignore USER_EMAIL is returning a string
   await page.locator("#n-email").type(process.env.USER_EMAIL);
-  // @ts-ignore USER_PASSWORD is returning a string
   await page.locator("#n-password2").type(process.env.USER_PASSWORD);
   await page.getByRole("button", { name: "Sign In" }).click();
 
@@ -16,8 +15,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("file upload", async ({ page }) => {
-  test.skip(process.env.CHECKLY_DONT === 'skip')
-  // @ts-ignore FILE_PATH is returning a string
+  test.skip(process.env.CHECKLY_DONT === "skip");
   await page.locator('input[type="file"]').setInputFiles(process.env.FILE_PATH);
 
   await page.getByRole("button", { name: "Upload" }).click();
@@ -26,7 +24,8 @@ test("file upload", async ({ page }) => {
 });
 
 test("file download", async ({ page }) => {
-  test.skip(process.env.CHECKLY_DONT === 'skip')
+  test.skip(process.env.CHECKLY_DONT === "skip");
+
   const url = await page.locator("#orders > ul > li > a").getAttribute("href");
   const filePath = "./tests/fixtures/downloadedFile.pdf";
 
@@ -39,7 +38,7 @@ test("file download", async ({ page }) => {
 });
 
 test("file download alt", async ({ page }) => {
-  test.skip(process.env.CHECKLY_DONT === 'skip')
+  test.skip(process.env.CHECKLY_DONT === "skip");
   const downloadPromise = page.waitForEvent("download");
 
   await page.getByRole("link", { name: "Invoice" }).click();
@@ -47,7 +46,6 @@ test("file download alt", async ({ page }) => {
   const download = await downloadPromise;
 
   const downloadFilePath = await download.path();
-  // @ts-ignore TEST_FILE_PATH is a string
   const testFile = await fs.promises.readFile(process.env.TEST_FILE_PATH);
   const downloadedFile = await fs.promises.readFile(downloadFilePath);
 

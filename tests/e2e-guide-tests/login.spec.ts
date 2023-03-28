@@ -1,16 +1,16 @@
+// @ts-nocheck
+
 import { test, expect } from "@playwright/test";
 
 test("login flow", async ({ page }) => {
   await page.goto("https://danube-web.shop/");
 
-  await page.click("#login");
+  await page.locator("#login").click();
 
-  // @ts-ignore USER_EMAIL is returning a string
-  await page.type("#n-email", process.env.USER_EMAIL);
-  // @ts-ignore USER_PASSWORD is returning a string
-  await page.type("#n-password2", process.env.USER_PASSWORD);
+  await page.locator("#n-email").type(process.env.USER_EMAIL);
+  await page.locator("#n-password2").type(process.env.USER_PASSWORD);
 
-  await page.click("#goto-signin-btn");
+  await page.locator("#goto-signin-btn").click();
 
   const loginMessage = await page.locator("#login-message");
   await expect(loginMessage).toBeVisible();

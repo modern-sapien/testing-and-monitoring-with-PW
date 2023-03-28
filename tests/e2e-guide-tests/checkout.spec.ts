@@ -1,11 +1,10 @@
-// @ts-ignore
 import { test, expect } from "@playwright/test";
 
 test("checkout", async ({ page }) => {
   const navigationPromise = page.waitForNavigation();
 
   await page.goto("https://danube-web.shop/");
-
+  // @ts-ignore
   for (let i = 1; i <= process.env.PRODUCTS_NUMBER; i++) {
     await page.click(`.preview:nth-child(${i}) > .preview-author`);
     await page.click(".detail-wrapper > .call-to-action");

@@ -16,6 +16,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("file upload", async ({ page }) => {
+  test.skip(process.env.CHECKLY_DONT === 'skip')
   // @ts-ignore FILE_PATH is returning a string
   await page.locator('input[type="file"]').setInputFiles(process.env.FILE_PATH);
 
@@ -25,6 +26,7 @@ test("file upload", async ({ page }) => {
 });
 
 test("file download", async ({ page }) => {
+  test.skip(process.env.CHECKLY_DONT === 'skip')
   const url = await page.locator("#orders > ul > li > a").getAttribute("href");
   const filePath = "./tests/fixtures/downloadedFile.pdf";
 
@@ -37,6 +39,7 @@ test("file download", async ({ page }) => {
 });
 
 test("file download alt", async ({ page }) => {
+  test.skip(process.env.CHECKLY_DONT === 'skip')
   const downloadPromise = page.waitForEvent("download");
 
   await page.getByRole("link", { name: "Invoice" }).click();
